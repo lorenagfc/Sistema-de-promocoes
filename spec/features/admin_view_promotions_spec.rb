@@ -29,9 +29,11 @@ feature 'Admin view promotions' do
                       description: 'Promoção de Cyber Monday',
                       code: 'CYBER15', discount_rate: 15,
                       expiration_date: '22/12/2033')
-
-    visit root_path
-    click_on 'Promoções'
+    #alteração henrique, comentar linha 33 e 34
+    #visit root_path
+    #click_on 'Promoções'
+    #adição linha 36
+    visit promotions_path
     click_on 'Cyber Monday'
 
     expect(page).to have_content('Cyber Monday')
