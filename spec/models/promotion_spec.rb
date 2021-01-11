@@ -5,7 +5,8 @@ describe Promotion do
     it 'attributes cannot be blank' do
       promotion = Promotion.new
 
-      promotion.valid?
+      #promotion.valid?
+      promotion.save
 
       expect(promotion.errors[:name]).to include('não pode ficar em branco')
       expect(promotion.errors[:code]).to include('não pode ficar em branco')
