@@ -10,6 +10,9 @@ feature 'Admin view promotions' do
                       code: 'CYBER15', discount_rate: 15,
                       expiration_date: '22/12/2033')
 
+    user = User.create!(email: 'fulana@locaweb.com.br', password:'123456')
+    
+    login_as user
     visit root_path
     click_on 'Promoções'
 
@@ -29,10 +32,12 @@ feature 'Admin view promotions' do
                       description: 'Promoção de Cyber Monday',
                       code: 'CYBER15', discount_rate: 15,
                       expiration_date: '22/12/2033')
-    #alteração henrique, comentar linha 33 e 34
+    user = User.create!(email: 'fulana@locaweb.com.br', password:'123456')
+    
+    login_as user
     #visit root_path
     #click_on 'Promoções'
-    #adição linha 36
+ 
     visit promotions_path
     click_on 'Cyber Monday'
 
@@ -45,6 +50,9 @@ feature 'Admin view promotions' do
   end
 
   scenario 'and no promotion are created' do
+    user = User.create!(email: 'fulana@locaweb.com.br', password:'123456')
+    
+    login_as user
     visit root_path
     click_on 'Promoções'
 
@@ -55,7 +63,9 @@ feature 'Admin view promotions' do
     Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
                       code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
                       expiration_date: '22/12/2033')
-
+    user = User.create!(email: 'fulana@locaweb.com.br', password:'123456')
+    
+    login_as user
     visit root_path
     click_on 'Promoções'
     click_on 'Voltar'
@@ -67,7 +77,9 @@ feature 'Admin view promotions' do
     Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
                       code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
                       expiration_date: '22/12/2033')
-
+    user = User.create!(email: 'fulana@locaweb.com.br', password:'123456')
+    
+    login_as user
     visit root_path
     click_on 'Promoções'
     click_on 'Natal'
@@ -75,4 +87,54 @@ feature 'Admin view promotions' do
 
     expect(current_path).to eq promotions_path
   end
+
+  scenario 'and cannot view promotions unless logged in' do
+    
+    visit promotions_path
+
+    expect(page).to_not have_content('Natal')
+    expect(page).to_not have_link('Promoções')
+    expect(current_path).to eq(new_user_session_path)
+
+  end
+
+  scenario 'and cannot view promotions unless logged in via link' do
+    Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
+                      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
+                      expiration_date: '22/12/2033')
+
+    visit promotions_path
+
+    expect(page).to_not have_content('Natal')
+    expect(page).to_not have_link('Promoções')
+    expect(current_path).to eq(new_user_session_path)
+
+  end
+
+  #continuar
+  xscenario 'and cannot view details unless logged in via link' do
+    promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
+                      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
+                      expiration_date: '22/12/2033')
+scenario 'and cannot view promotions unless logged in via link' do
+    Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
+                      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
+                      expiration_date: '22/12/2033')
+
+    visit promotions_path
+
+    expect(page).to_not have_content('Natal')
+    expect(page).to_not have_link('Promoções')
+    expect(current_path).to eq(new_user_session_path)
+
+  end
+    visit promotions_path(promotion)
+
+    expect(page).to_not have_content('Natal')
+    expect(page).to_not have_link('Promoções')
+    expect(current_path).to eq(new_user_session_path)
+
+  end
+
+  #fazer testes show, new, etc...
 end

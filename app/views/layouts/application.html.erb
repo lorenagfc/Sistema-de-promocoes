@@ -11,6 +11,16 @@
 
   <body>
     #inserido por mim
+    <nav> 
+      <% if user_signed_in? %>
+        <p> <%= current_user.email %> </p>
+        <%= link_to 'Promoções', promotions_path %>
+        <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to 'Login', new_user_session_path %>
+      <% end %>
+    </nav>
+    
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     

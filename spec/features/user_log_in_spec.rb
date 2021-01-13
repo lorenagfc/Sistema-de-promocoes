@@ -18,8 +18,7 @@ feature 'User log in' do
         #mostra links quando logado
     end
 
-    #continuar
-    xscenario 'and log out' do
+    scenario 'and log out' do
         user = User.create!(email: 'fulana@locaweb.com.br', password:'123456')
     
         visit root_path
@@ -30,6 +29,7 @@ feature 'User log in' do
         click_on 'Sair'
 
         expect(current_path).to eq(root_path)
+        expect(page).to have_content('Saiu com sucesso')
         expect(page).to_not have_content(user.email)
         expect(page).to have_link('Login')
         expect(page).to_not have_link('Sair')
