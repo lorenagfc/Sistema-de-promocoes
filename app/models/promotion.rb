@@ -4,7 +4,7 @@ class Promotion < ApplicationRecord
               :discount_rate,
               :coupon_quantity,
               :expiration_date,
-              presence: { message: 'não pode ficar em branco' }
-    validates :code, uniqueness: { message: 'deve ser único' }
+              presence: true
+    validates :code, uniqueness: true
 
 end
