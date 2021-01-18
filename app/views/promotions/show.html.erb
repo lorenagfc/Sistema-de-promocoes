@@ -20,10 +20,15 @@
 <% else %>
     <h1> Cupons </h1>
 
-    <% @promotion.coupons.each do |coupon| %>
-        <dl>
-            <dt> Código </dt>
-            <dd> <%= coupon.code  %> </dd>
-        </dl>
-    <% end %>
+    <%= render @promotion.coupons %>
+    
+    #<% @promotion.coupons.each do |coupon| %>
+        #<dl>
+            #<dt> Coupon.human_attribute_name(:code) </dt>
+            #<dd> <%= coupon.title  %> </dd>
+        #</dl>
+        #<% if coupon.active? %>
+            #<% link_to t('.inactivate_cupom'), inactivate_coupon_path(coupon), method: >post %>
+        #<% end %>
+    #<% end %>
 <% end %>

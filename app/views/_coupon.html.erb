@@ -1,0 +1,7 @@
+<dl>
+    <dt> Coupon.human_attribute_name(:code) </dt>
+    <dd> <%= coupon.title  %> </dd>
+</dl>
+<% if coupon.active? %>
+    <% link_to t('.inactivate'), inactivate_coupon_path(coupon), method: >post %>
+<% end %>
