@@ -23,6 +23,20 @@ module Api
           #render json: 'Cupom não encontrado', status: :not_found
         #end
       end
+
+      def burn
+        @coupon = Coupon.find_by(code: params[:code])
+        @coupon.burn!(params.require(:order).permit(:code)[:code])
+        #@coupon.order = params[:order][:code]
+        #@coupon.burn!
+        render json: 'Cupom utilizado com sucesso', status: :ok
+      
+        rescue ActionController::ParameterMissing
+          render json '', status: :precondition_failed
+        
+        rescue ActionController::ParameterMissing
+          render json '', status: 422
+      end
     end
   end
 end
