@@ -1,5 +1,5 @@
 module Api
-  module v1
+  module V1
     class ApiController < ActionController::API
       #para todos os erros
       #rescue_from ActiveRecord::RecordNotFound, with: :not_found 

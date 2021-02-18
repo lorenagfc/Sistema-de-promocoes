@@ -1,6 +1,8 @@
 module Api
-  module v1
+  module V1
     class CouponsController < ApiController
+      before_action :verify_coupon_code, only: %i[burn]
+
       def show
         # achar o cupom
         #@coupon = Coupon.find_by(code: params[:code])
@@ -16,7 +18,7 @@ module Api
 
         @coupon = Coupon.find_by(code: params[:code])
         return render json: 'Cupom não encontrado', status: :not_found if @coupon.nil?
-        render json: @coupon.as_json status: :ok #as_json pode ser removido pois é padrao
+        render json: @coupon, status: :ok #as_json pode ser removido pois é padrao
       
         #ao invés do return,
         #rescue ActiveRecord::RecordNotFound
@@ -25,8 +27,9 @@ module Api
       end
 
       def burn
-        @coupon = Coupon.find_by(code: params[:code])
-        @coupon.burn!(params.require(:order).permit(:code)[:code])
+        @coupon = Coupon.find_by!(code: params[:code])
+        @coupon.burn!(params[:order][:code])
+        #@coupon.burn!(params.require(:order).permit(:code)[:code])
         #@coupon.order = params[:order][:code]
         #@coupon.burn!
         render json: 'Cupom utilizado com sucesso', status: :ok
@@ -37,6 +40,14 @@ module Api
         rescue ActionController::ParameterMissing
           render json '', status: 422
       end
+
+      private
+
+      def verify_coupon_code
+        return if params.dig(:order, :code)
+        render json: '', status: :precondition_failed
+      end
+
     end
   end
 end
