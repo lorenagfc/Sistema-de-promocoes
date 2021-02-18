@@ -13,7 +13,7 @@ class Promotion < ApplicationRecord
 
     def generate_coupons!
         raise 'Cupons já foram criados' if coupons.any?
-byebug
+
         coupons.create_with(created_at: Time.now, updated_at: Time.now)
         Coupon.insert_all!(generate_coupons_code)
 
