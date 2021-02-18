@@ -4,6 +4,7 @@
     <h3> <%= link_to promotion.name, promotion %> </h3>
     <p> <%= promotion.description %> </p>
     <p> <%= number_to_percentage promotion.discount_rate, precision: 2, separator: ',' %> </p>
+    <%= link_to 'Editar', edit_promotion_path(promotion) %>
     <%= link_to 'Deletar', promotion_path(promotion), method: :delete, data: {confirm: 'Deseja mesmo apagar item?'}%>
 <% end %>
 
