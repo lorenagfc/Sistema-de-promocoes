@@ -16,7 +16,7 @@ describe 'Coupon management' do
         end
 
         it 'coupon not found' do
-            get "/api/v1/coupons/NAOEXISTE"
+            get "/api/v1/coupons/NAOEXISTE1"
 
             expect(response).to have_http_status(:not_found)
             expect(response.body).to include('Cupom não encontrado')
@@ -48,13 +48,8 @@ describe 'Coupon management' do
         expect(coupon.reload.order).to eq('ORDEM1')
       end
 
-      xit 'coupon not found by code' do
-        promotion = Promotion.create!(name: 'Cyber Monday', description: 'Promoção de Cyber Monday',
-                                      code: 'CYBER15', discount_rate: 15,
-                                      coupon_quantity: 100, expiration_date: '22/12/2033')
-        coupon = Coupon.create!(promotion: promotion, code: 'CYBER15-0001')
-        
-        post "/api/v1/coupons/#{coupon.code}/burn", params: { order: { code: 'ORDEM1' } }
+      it 'coupon not found by code' do
+        post "/api/v1/coupons/NAOEXISTE/burn", params: { order: { code: 'ORDEM1' } }
 
         expect(response).to have_http_status(:not_found)
         expect(response.body).to include('Cupom não encontrado')
