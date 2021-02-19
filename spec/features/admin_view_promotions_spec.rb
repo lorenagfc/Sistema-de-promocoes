@@ -111,29 +111,16 @@ feature 'Admin view promotions' do
 
   end
 
-  #continuar
   xscenario 'and cannot view details unless logged in via link' do
     promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
-                      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
-                      expiration_date: '22/12/2033')
-scenario 'and cannot view promotions unless logged in via link' do
-    Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
-                      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
-                      expiration_date: '22/12/2033')
+                                  code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
+                                  expiration_date: '22/12/2033')
 
-    visit promotions_path
+    visit promotion_path(promotion)
 
     expect(page).to_not have_content('Natal')
     expect(page).to_not have_link('Promoções')
     expect(current_path).to eq(new_user_session_path)
-
-  end
-    visit promotions_path(promotion)
-
-    expect(page).to_not have_content('Natal')
-    expect(page).to_not have_link('Promoções')
-    expect(current_path).to eq(new_user_session_path)
-
   end
 
   #fazer testes show, new, etc...

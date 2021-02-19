@@ -34,11 +34,8 @@ module Api
         #@coupon.burn!
         render json: 'Cupom utilizado com sucesso', status: :ok
       
-        rescue ActionController::ParameterMissing
-          render json '', status: :precondition_failed
-        
-        rescue ActionController::ParameterMissing
-          render json '', status: 422
+        rescue ActiveRecord::RecordInvalid
+          render json: '', status: 422
       end
 
       private

@@ -16,12 +16,12 @@ feature 'Admin generates coupons' do
         click_on promotion.name
         click_on 'Emitir cupons'
 
-        expect(current_path).to eq(promotions_path(promotion))
-        expect(page).to have_content('PASCOA10-001 (disponível)')
-        expect(page).to have_content('PASCOA10-002 (disponível)')
-        expect(page).to have_content('PASCOA10-003 (disponível)')
-        expect(page).to have_content('PASCOA10-004 (disponível)')
-        expect(page).to have_content('PASCOA10-005 (disponível)')
+        expect(current_path).to eq(promotion_path(promotion))
+        expect(page).to have_content('PASCOA10-0001 (disponível)')
+        expect(page).to have_content('PASCOA10-0002 (disponível)')
+        expect(page).to have_content('PASCOA10-0003 (disponível)')
+        expect(page).to have_content('PASCOA10-0004 (disponível)')
+        expect(page).to have_content('PASCOA10-0005 (disponível)')
         expect(page).to have_content('Cupons gerados com sucesso')
         expect(page).to_not have_link('Emitir cupons')
     end
@@ -36,7 +36,7 @@ feature 'Admin generates coupons' do
         user = User.create!(email: 'fulana@locaweb.com.br', password: '123456')
     
         login_as user, scope: :user
-        visit promotions_path(promotion)
+        visit promotion_path(promotion)
 
         expect(page).not_to have_link('Emitir cupons')
         expect(page).to have_content(coupon.code)

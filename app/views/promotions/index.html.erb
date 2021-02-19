@@ -1,3 +1,4 @@
+<%= link_to 'Voltar', root_path %>
 <%= link_to 'Registrar uma promoção', new_promotion_path %>
 
 <% @promotions.each do |promotion| %>
@@ -11,5 +12,3 @@
 <% if @promotions.empty? %>
     <p>Nenhuma promoção cadastrada</p>
 <% end %>
-
-<%= link_to 'Voltar', root_path %>

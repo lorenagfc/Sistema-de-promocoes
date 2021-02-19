@@ -6,8 +6,7 @@ class PromotionsController < ApplicationController
         @promotions = Promotion.all
     end
 
-    def show
-    end
+    def show; end
 
     def new
         @promotion = Promotion.new
@@ -23,8 +22,7 @@ class PromotionsController < ApplicationController
         end
     end
 
-    def edit
-    end  
+    def edit; end  
 
     def update
         if @promotion.update(promotion_params)
@@ -41,7 +39,7 @@ class PromotionsController < ApplicationController
 
     def generate_coupons
         @promotion.generate_coupons!
-        flash[:success] = 'Cupons gerados com sucesso'
+        flash[:notice] = 'Cupons gerados com sucesso'
         redirect_to @promotion
     end
 

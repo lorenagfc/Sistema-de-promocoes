@@ -22,13 +22,10 @@
 
     <%= render @promotion.coupons %>
     
-    <% @promotion.coupons.each do |coupon| %>
-        <dl>
-            <dt> Coupon.human_attribute_name(:code) </dt>
-            <dd> <%= coupon.title  %> </dd>
-        </dl>
-        <% if coupon.active? %>
-            <% link_to t('.inactivate_cupom'), inactivate_coupon_path(coupon), method: :post %>
-        <% end %>
-    <% end %>
+    <%# @promotion.coupons.each do |coupon| %>
+        <%# <dl> %>
+            <%# <dt> Coupon.human_attribute_name(:code) </dt> %>
+            <%# <dd>  coupon.title   </dd> %>
+        <%# </dl> %>
+    <%# end %>
 <% end %>

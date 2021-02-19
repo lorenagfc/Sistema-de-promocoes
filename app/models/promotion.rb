@@ -15,9 +15,9 @@ class Promotion < ApplicationRecord
         raise 'Cupons já foram criados' if coupons.any?
 
         coupons.create_with(created_at: Time.now, updated_at: Time.now)
-        Coupon.insert_all!(generate_coupons_code)
-
-        #(1..coupon_quantity).each do |number|
+               .insert_all!(generate_coupons_code)
+        
+               #(1..coupon_quantity).each do |number|
             #coupons.create!(code: "#{code}-#{'%04d' % number}")
         #end
     end
